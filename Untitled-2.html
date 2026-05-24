@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kyle Malabanan | Portfolio</title>
+
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background: #2c3e50;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.navbar a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1498050108023-c5249f4df085');
+    background-size: cover;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+.btn {
+    background: orange;
+    padding: 12px 25px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* SECTION */
+.section {
+    padding: 60px 80px;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ABOUT */
+.about {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.about img {
+    width: 300px;
+    border-radius: 10px;
+}
+
+/* PROJECTS */
+.project {
+    background: white;
+    padding: 20px;
+    margin: 10px auto;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+/* FOOTER */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>Kyle M.</h2>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="home">
+    <div>
+        <h1>Hello, I'm Kyle</h1>
+        <p>Aspiring Developer | Tech Enthusiast</p>
+        <a href="#about" class="btn">Get Started</a>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section about" id="about">
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c">
+    <div>
+        <h2>About Me</h2>
+        <p>
+            I am Kyle Malabanan, a Computer Engineering student from CPE3B.
+            I am passionate about technology, programming, and building digital solutions.
+        </p>
+        <p>
+            I enjoy learning new skills, exploring web development, and improving step by step.
+            My goal is to become a successful developer and contribute to real-world projects.
+        </p>
+
+        <h3>Education</h3>
+        <p>Computer Engineering Student - University of Batangas</p>
+
+        <h3>Goals</h3>
+        <ul>
+            <li>Become a full-stack developer</li>
+            <li>Build real-world applications</li>
+            <li>Continuously improve coding skills</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+    <h2>My Skills</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>HTML & CSS</h3>
+            <p>Designing responsive and clean websites.</p>
+        </div>
+        <div class="card">
+            <h3>Programming</h3>
+            <p>Basic knowledge in Python and C++.</p>
+        </div>
+        <div class="card">
+            <h3>Problem Solving</h3>
+            <p>Logical thinking and debugging skills.</p>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section" id="projects">
+    <h2>My Projects</h2>
+
+    <div class="project">
+        <h3>Simple Portfolio Website</h3>
+        <p>A personal website showcasing my profile and skills.</p>
+        <a href="#" class="btn">View Project</a>
+    </div>
+
+    <div class="project">
+        <h3>Basic Calculator</h3>
+        <p>A simple calculator using programming logic.</p>
+        <a href="#" class="btn">View Project</a>
+    </div>
+
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+    <h2>Contact Me</h2>
+    <p style="text-align:center;">Email: 2320708@ub.edu.ph</p>
+    <p style="text-align:center;">Feel free to reach out for collaboration or learning!</p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 Kyle Malabanan | CPE3B</p>
+</div>
+
+</body>
+</html>

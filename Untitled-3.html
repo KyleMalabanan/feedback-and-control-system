@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kyle Malabanan | Portfolio</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #8b0033;
+    color: white;
+}
+
+/* MAIN LAYOUT */
+.container {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* BOX STYLE */
+.box {
+    background: black;
+    border: 2px solid hotpink;
+    padding: 10px;
+}
+
+/* PROFILE */
+.profile img {
+    width: 100%;
+    border: 2px solid hotpink;
+}
+
+/* NAVBAR */
+.navbar {
+    background: black;
+    padding: 10px;
+    border-bottom: 2px solid hotpink;
+    text-align: center;
+}
+
+.navbar a {
+    color: hotpink;
+    margin: 10px;
+    text-decoration: none;
+}
+
+/* GALLERY */
+.gallery img {
+    width: 70px;
+    margin: 5px;
+    border: 2px solid hotpink;
+}
+
+/* MAIN CONTENT */
+.main img {
+    width: 150px;
+    border: 2px solid hotpink;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid hotpink;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Profile</a>
+    <a href="#">Friends</a>
+    <a href="#">Photos</a>
+</div>
+
+<div class="container">
+
+    <!-- LEFT SIDEBAR -->
+    <div>
+
+        <div class="box profile">
+            <h3>About Me</h3>
+            <img src="your-photo.jpg" alt="Kyle Profile">
+            <p><b>Name:</b> Kyle</p>
+            <p><b>Status:</b> Online</p>
+            <p><b>Course:</b> CpE</p>
+        </div>
+
+        <div class="box">
+            <h3>Contact</h3>
+            <p>Email: 2320708@ub.edu.ph</p>
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <div class="box">
+            <h2>Kyle's Profile</h2>
+            <p>"Aspiring Developer | Tech Enthusiast"</p>
+        </div>
+
+        <div class="box">
+            <h3>Status</h3>
+            <p>Currently learning HTML, CSS & Python</p>
+        </div>
+
+        <div class="box">
+            <h3>Top Friends</h3>
+            <div class="gallery">
+                <img src="https://i.imgur.com/1.jpg">
+                <img src="https://i.imgur.com/2.jpg">
+                <img src="https://i.imgur.com/3.jpg">
+                <img src="https://i.imgur.com/4.jpg">
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>Projects</h3>
+            <p>✔ Portfolio Website</p>
+            <p>✔ Calculator App</p>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div>
+
+        <div class="box">
+            <h3>Music</h3>
+            <p>🎵 Now Playing: Love Song</p>
+        </div>
+
+        <div class="box">
+            <h3>Photos</h3>
+            <div class="gallery">
+                <img src="https://i.imgur.com/5.jpg">
+                <img src="https://i.imgur.com/6.jpg">
+                <img src="https://i.imgur.com/7.jpg">
+                <img src="https://i.imgur.com/8.jpg">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 Kyle Malabanan
+</div>
+
+</body>
+</html>
