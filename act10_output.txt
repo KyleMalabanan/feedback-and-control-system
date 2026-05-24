@@ -1,0 +1,170 @@
+import sys
+from openai import OpenAI
+import keyboard
+from langchain_community.chat_message_histories import ChatMessageHistory
+
+# Connect to LM Studio Local server
+client = OpenAI(
+    base_url="http://127.0.0.1:1234/v1",
+    api_key="lm-studio"
+)
+
+# Initialize the history object
+history = ChatMessageHistory()
+
+# Read the code and save to output file first
+with open("act10.py", "r") as code_file:
+    code_content = code_file.read()
+
+output = open("act10_output.txt", "w", encoding="utf-8")
+output.write(code_content)
+output.write("\n" + "=" * 100 + "\n")
+output.write("                         CONVERSATION OUTPUT\n")
+output.write("=" * 100 + "\n\n")
+output.close()
+
+# Reopen in append mode
+output = open("act10_output.txt", "a", encoding="utf-8")
+
+print("=" * 100)
+print("                         AI CHATBOT - Powered by LM Studio")
+print("=" * 100)
+print("Type 'exit' or press ESC to quit.")
+print("=" * 100)
+
+while True:
+    query = input("\nUser (Type 'exit' or press ESC to quit): ")
+
+    if keyboard.is_pressed('Esc') or query.lower() == 'exit':
+        print("\nExiting...")
+        print("Program Finished.")
+        output.write("Exiting...\nProgram Finished.")
+        output.close()
+        break
+
+    if not query.strip():
+        continue
+
+    print("\nUser Input:", query)
+    print('- ' * 50)
+    output.write(f"\nUser Input: {query}\n")
+    output.write('- ' * 50 + "\n")
+
+    history.add_user_message(query)
+
+    messages_with_history = []
+    for m in history.messages:
+        role = "user" if m.type == "human" else "assistant"
+        messages_with_history.append({"role": role, "content": m.content})
+
+    try:
+        response = client.chat.completions.create(
+            model="google/gemma-4-e4b",
+            messages=messages_with_history
+        )
+        full_ai_response = response.choices[0].message.content
+        print("\nAI Response:\n")
+        print(full_ai_response)
+        output.write(f"\nAI Response:\n\n{full_ai_response}\n")
+        history.add_ai_message(full_ai_response)
+
+    except Exception as e:
+        print(f"\n Error: {e}")
+        print("Make sure LM Studio is running at http://127.0.0.1:1234")
+
+    print('\n' + '=' * 100 + '\n')
+    output.write('\n' + '=' * 100 + '\n')
+====================================================================================================
+                         CONVERSATION OUTPUT
+====================================================================================================
+
+
+User Input: hi. my name is kyle malabanan
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+AI Response:
+
+Hi Kyle Malabanan, it's nice to meet you! 👋
+
+How can I help you today?
+
+====================================================================================================
+
+User Input: give me a description about control system
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+AI Response:
+
+That's a huge topic that touches on electrical engineering, computer science, physics, and biology! Since "control system" can mean many different things depending on the context, I will give you a comprehensive description covering the basic concept, how they work, their types, and where we find them in real life.
+
+---
+
+# ⚙️ What is a Control System? (The Overview)
+
+In its simplest terms, **a control system is any mechanism designed to maintain a desired state or behavior over time.**
+
+Think of it as the brain that manages a physical process. Its goal is always to ensure that an actual output matches a predetermined target (the setpoint). If there's a difference, the control system calculates what needs to be adjusted and makes corrections automatically.
+
+### 🍎 Simple Analogy: The Thermostat
+The best way to understand it is by thinking about a home thermostat:
+
+1.  **Desired State (Setpoint):** You set the temperature to $70^{\circ}\text{F}$.
+2.  **Measurement:** The sensor measures the current room temperature (e.g., $65^{\circ}\text{F}$).
+3.  **Error Calculation:** The system calculates the difference: $70 - 65 = 5^{\circ}$ ($\text{The Error}$).
+4.  **Action:** Because of the error, the controller signals the furnace to turn **on**.
+5.  **Goal:** Keep the temperature as close to $70^{\circ}\text{F}$ as possible, constantly adjusting power consumption until the error is zero (or within an acceptable range).
+
+---
+
+# 🔄 How Do Control Systems Work? (The Concept)
+
+Almost all modern control systems rely on a concept called **feedback**. Feedback means that the system continuously measures its own output and uses that measurement to adjust its actions. This creates a continuous, self-correcting loop.
+
+### The Core Components of Any System:
+
+1.  **Input/Reference (Setpoint):** What you *want* the system to be (e.g., $70^{\circ}\text{F}$).
+2.  **Sensor/Transducer:** Measures the actual output or variable (e.g., thermometer). This turns physical energy into an electrical signal.
+3.  **Controller:** The "brain" that takes the desired value and the measured value, calculates the **error**, and determines what action is needed (e.g., a microcontroller running PID logic).
+4.  **Actuator:** The component that executes the required physical action based on the controller's signal (e.g., the furnace burner switching on).
+5.  **Process/Plant:** The system being controlled (e.g., the house and its air temperature).
+
+---
+
+# 💡 Key Distinction: Open-Loop vs. Closed-Loop
+
+This is the most critical difference in control theory, separating simple devices from sophisticated ones.
+
+### 1. Open-Loop Control Systems
+*   **How they work:** The action taken does *not* depend on measuring the output. They operate based purely on a predefined sequence or timing.
+*   **Mechanism:** Input $\rightarrow$ Action $\rightarrow$ Output (No measurement of output is used for correction).
+*   **Example:** A toaster. You set it for 60 seconds, and it toasts for exactly 60 seconds, regardless of how dark the bread actually got. If the bread was damp, it might burn; if it was dry, it might be barely warm.
+
+### 2. Closed-Loop Control Systems (Feedback Systems)
+*   **How they work:** The system continuously measures its own output and compares it to the desired input. The difference (the error signal) is used to calculate adjustments.
+*   **Mechanism:** Input $\rightarrow$ Action $\rightarrow$ Output $\rightarrow$ **Measure Output** $\rightarrow$ **Compare ($\text{Error}$) $\rightarrow$ Adjust Action**.
+*   **Example:** Cruise control in a car. If you set the speed to 60 mph, but go up a hill (and the car slows down), the system senses the dip from the speedometer and automatically increases the throttle until the error is corrected.
+
+---
+
+# 🚀 Real-World Applications
+
+Control systems are everywhere, forming the backbone of modern technology:
+
+| System | Controlled Variable | Function/Mechanism |
+| :--- | :--- | :--- |
+| **Cruise Control** (Car) | Vehicle Speed | Closed-loop feedback using speedometer input. |
+| **Thermostat** (House) | Temperature | Closed-loop feedback using sensor input. |
+| **Drone Stabilizers** | Attitude/Altitude | Extremely complex closed-loop systems that constantly adjust motor speed based on gyroscope readings to maintain stability. |
+| **Robotic Arm** | Position/Torque | Uses encoders and sensors to ensure the arm reaches a specific coordinate regardless of external resistance (gravity, weight). |
+| **Automated Power Grid** | Voltage/Frequency | Continuously adjusts power generation and load switching to maintain stable electrical parameters. |
+
+### Summary for Quick Recall:
+
+*   **Goal:** To make an output match a setpoint.
+*   **Mechanism:** Continuous monitoring of the difference between what is desired and what actually is ($\text{Error}$).
+*   **Key Concept:** Feedback (using measurement to correct action).
+*   **Difference:** Open-loop systems are simple timers; closed-loop systems are self-correcting intelligence.
+
+====================================================================================================
+Exiting...
+Program Finished.

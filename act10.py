@@ -1,3 +1,4 @@
+import sys
 from openai import OpenAI
 import keyboard
 from langchain_community.chat_message_histories import ChatMessageHistory
@@ -11,11 +12,24 @@ client = OpenAI(
 # Initialize the history object
 history = ChatMessageHistory()
 
+# Read the code and save to output file first
+with open("act10.py", "r") as code_file:
+    code_content = code_file.read()
+
+output = open("act10_output.txt", "w", encoding="utf-8")
+output.write(code_content)
+output.write("\n" + "=" * 100 + "\n")
+output.write("                         CONVERSATION OUTPUT\n")
+output.write("=" * 100 + "\n\n")
+output.close()
+
+# Reopen in append mode
+output = open("act10_output.txt", "a", encoding="utf-8")
+
 print("=" * 100)
 print("                         AI CHATBOT - Powered by LM Studio")
 print("=" * 100)
 print("Type 'exit' or press ESC to quit.")
-print("Type 'clear' to reset conversation history.")
 print("=" * 100)
 
 while True:
@@ -24,19 +38,17 @@ while True:
     if keyboard.is_pressed('Esc') or query.lower() == 'exit':
         print("\nExiting...")
         print("Program Finished.")
+        output.write("Exiting...\nProgram Finished.")
+        output.close()
         break
-
-    if query.lower() == 'clear':
-        history.clear()
-        print("\n Conversation history cleared.\n")
-        print("=" * 100)
-        continue
 
     if not query.strip():
         continue
 
     print("\nUser Input:", query)
     print('- ' * 50)
+    output.write(f"\nUser Input: {query}\n")
+    output.write('- ' * 50 + "\n")
 
     history.add_user_message(query)
 
@@ -53,6 +65,7 @@ while True:
         full_ai_response = response.choices[0].message.content
         print("\nAI Response:\n")
         print(full_ai_response)
+        output.write(f"\nAI Response:\n\n{full_ai_response}\n")
         history.add_ai_message(full_ai_response)
 
     except Exception as e:
@@ -60,3 +73,4 @@ while True:
         print("Make sure LM Studio is running at http://127.0.0.1:1234")
 
     print('\n' + '=' * 100 + '\n')
+    output.write('\n' + '=' * 100 + '\n')
